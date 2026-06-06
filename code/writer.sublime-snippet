@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+write!(out, "{:?}", ${1:x}).unwrap();
+]]></content>
+	<tabTrigger>w</tabTrigger>
+	<scope>source.rust</scope>
+</snippet>

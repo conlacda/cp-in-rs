@@ -1,0 +1,7 @@
+<snippet>
+	<content><![CDATA[
+scan.token();
+]]></content>
+	<tabTrigger>s</tabTrigger>
+	<scope>source.rust</scope>
+</snippet>

@@ -1,0 +1,9 @@
+[book]
+title = "Competitive programming in Rust"
+authors = ["conlacda"]
+language = "en"
+
+[output.html.playground]
+editable = true
+copy-js = true
+line-numbers = true

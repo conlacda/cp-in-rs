@@ -1,0 +1,25 @@
+name: Test Rust templates
+
+on:
+  push:
+    paths:
+      - 'code/**'
+
+jobs:
+  test_rs_templates:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Install cargo-nextest
+        uses: taiki-e/install-action@nextest
+
+      - name: Run Rust tests with nextest
+        run: |
+          cd code
+          cargo nextest run --stress-count 100 && cargo test --doc
+          # cargo nextest run --stress-count 1000 -- <test-name>
