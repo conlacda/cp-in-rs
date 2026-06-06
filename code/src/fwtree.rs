@@ -1,5 +1,4 @@
-// START_TEMPLATE
-// START_SECTION RangeUpdatePointQuery
+// ANCHOR: RangeUpdatePointQuery
 
 use std::ops::RangeBounds;
 
@@ -70,9 +69,9 @@ impl FenwickTree {
         ans
     }
 }
+// ANCHOR_END: RangeUpdatePointQuery
 
-// END_SECTION RangeUpdatePointQuery
-// START_SECTION RangeQueryPointUpdate
+// ANCHOR: RangeQueryPointUpdate
 /// Fenwick tree for range query point update
 ///
 /// # Usage
@@ -206,9 +205,7 @@ impl FwTree {
         Some(r)
     }
 }
-// END_SECTION RangeQueryPointUpdate
-
-// END_TEMPLATE
+// ANCHOR_END: RangeQueryPointUpdate
 
 #[cfg(test)]
 mod tests {

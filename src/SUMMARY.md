@@ -1,8 +1,12 @@
 # Summary
+- [Setup](./rust-things/setup.md)
+- [Compilation](./rust-things/compilation.md)
+- [Recursive](./rust-things/recursive.md)
 
-- [Rust things](./start.md)
-  - [Setup](./rust-things/setup.md)
+# String
+- [Hash String](./string/hash_string.md)
 
-- [String](./chapter_1.md)
-  - [Hash String](./string/hash_string.md)
-  - [RabinCarp](./string/rabin_carp.md)
+# Range query
+- [Fenwick tree]()
+  - [Range query point update](./range-query/fw-range-query-point-update.md)
+  - [Range update point query](./range-query/fw-range-update-point-query.md)
