@@ -4,6 +4,7 @@ pub mod graph;
 pub mod hashstr;
 pub mod macros;
 pub mod mint;
+pub mod persistent_dsu;
 pub mod random;
 pub mod recursive;
 pub mod rmq;
