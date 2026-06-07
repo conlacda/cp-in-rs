@@ -1,5 +1,4 @@
-// START_TEMPLATE
-// START_SECTION SEGTREE
+// ANCHOR: segtree
 pub trait Node: Default + Clone + Copy {
     fn combine(&self, other: Self) -> Self;
     fn right_to_left(&self) -> Self {
@@ -123,9 +122,9 @@ where
         if cmp(&acc) { Some(l) } else { None }
     }
 }
-// END_SECTION SEGTREE
+// ANCHOR_END: segtree
 
-// START_SECTION SumNode
+// ANCHOR: SumNode
 #[derive(Default, Clone, Copy)]
 pub struct SumNode {
     pub val: i64,
@@ -152,10 +151,9 @@ impl Node for SumNode {
         Self::new(self.val + other.val)
     }
 }
+// ANCHOR_END: SumNode
 
-// END_SECTION SumNode
-
-// START_SECTION MinNode
+// ANCHOR: MinNode
 #[derive(Default, Clone, Copy)]
 pub struct MinNode {
     pub val: i64,
@@ -182,9 +180,9 @@ impl Node for MinNode {
         Self::new(self.val.min(other.val))
     }
 }
-// END_SECTION MinNode
+// ANCHOR_END: MinNode
 
-// START_SECTION MaxNode
+// ANCHOR: MaxNode
 #[derive(Default, Clone, Copy)]
 pub struct MaxNode {
     pub val: i64,
@@ -211,9 +209,9 @@ impl Node for MaxNode {
         Self::new(self.val.max(other.val))
     }
 }
-// END_SECTION MaxNode
+// ANCHOR_END: MaxNode
 
-// START_SECTION Subrange
+// ANCHOR: Subrange
 #[derive(Default, Clone, Copy)]
 pub struct Subrange {
     pub max_mid: i64,
@@ -267,8 +265,7 @@ impl Node for Subrange {
         }
     }
 }
-// END_SECTION Subrange
-// END_TEMPLATE
+// ANCHOR_END: Subrange
 
 #[cfg(test)]
 mod tests {

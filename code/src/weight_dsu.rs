@@ -1,4 +1,4 @@
-// START_TEMPLATE
+// ANCHOR: main
 pub struct WeightDsu {
     n: usize,
     parent: Vec<usize>,
@@ -68,7 +68,7 @@ impl WeightDsu {
         self.find(u) == self.find(v)
     }
 }
-// END_TEMPLATE
+// ANCHOR_END: main
 
 #[cfg(test)]
 mod tests {

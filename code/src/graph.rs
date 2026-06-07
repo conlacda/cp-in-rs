@@ -2,7 +2,7 @@ use crate::recursive::Callable;
 use crate::recursive::RecursiveFunction;
 use std::cell::RefCell;
 
-// START_SECTION toposort
+// ANCHOR: toposort
 pub fn toposort(g: &[Vec<usize>]) -> Vec<usize> {
     let n = g.len();
     let mut vis: Vec<bool> = vec![false; n];
@@ -23,9 +23,9 @@ pub fn toposort(g: &[Vec<usize>]) -> Vec<usize> {
     order.reverse();
     order
 }
-// END_SECTION toposort
+// ANCHOR_END: toposort
 
-// START_SECTION find_scc
+// ANCHOR: find_scc
 fn reversed_graph(g: &[Vec<usize>]) -> Vec<Vec<usize>> {
     let n = g.len();
     let mut rg = vec![vec![]; n];
@@ -75,7 +75,7 @@ pub fn find_scc(g: &[Vec<usize>]) -> Vec<Vec<usize>> {
     }
     result
 }
-// END_SECTION find_scc
+// ANCHOR_END: find_scc
 
 #[cfg(test)]
 mod tests {

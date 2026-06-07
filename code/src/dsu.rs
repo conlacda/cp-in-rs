@@ -1,4 +1,4 @@
-// START_TEMPLATE
+// ANCHOR: main
 pub struct DsuNode {
     size: i64,
 }
@@ -58,7 +58,7 @@ impl DSU {
         &mut self.data[root]
     }
 }
-// END_TEMPLATE
+// ANCHOR_END: main
 
 #[cfg(test)]
 mod tests {

@@ -1,4 +1,4 @@
-// START_TEMPLATE
+// ANCHOR: main
 #[derive(Default, Debug)]
 pub struct RMQ<T: Clone> {
     values: Vec<T>,
@@ -77,7 +77,7 @@ impl<T: Clone + Ord> RMQ<T> {
         self.values[self.query_index(l, r)].clone()
     }
 }
-// END_TEMPLATE
+// ANCHOR_END: main
 
 #[cfg(test)]
 mod tests {

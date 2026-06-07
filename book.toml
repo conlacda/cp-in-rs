@@ -3,6 +3,9 @@ title = "Competitive programming in Rust"
 authors = ["conlacda"]
 language = "en"
 
+[output.html]
+git-repository-url = "https://github.com/conlacda/cp-in-rs"
+
 [output.html.playground]
 editable = true
 copy-js = true

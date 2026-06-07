@@ -11,7 +11,7 @@ use crate::recursive::Callable;
 use crate::recursive::RecursiveFunction;
 
 let mut dfs = RecursiveFunction::new(|dfs, u: usize| {
-    dfs.call(v);
+    dfs.call(u);
 });
 dfs.call(0);
 ```
