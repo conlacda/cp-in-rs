@@ -2,7 +2,7 @@
 
 ## Template
 ```rust 
-{{#include ../../code/src/persistent_dsu.rs:main}}
+{{#include ../../code/src/datastructure/persistent_dsu.rs:main}}
 ```
 
 ## Usage

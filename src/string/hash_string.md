@@ -3,7 +3,7 @@
 ## Template
 
 ```rust showLineNumbers
-{{#include ../../code/src/hashstr.rs:hash-function}}
+{{#include ../../code/src/string/hashstr.rs:hash-function}}
 ```
 
 ## Usage

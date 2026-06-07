@@ -3,7 +3,7 @@ Range minimum/maximum query
 
 ## Template
 ```rust
-{{#include ../../code/src/rmq.rs:main}}
+{{#include ../../code/src/range_query/rmq.rs:main}}
 ```
 
 ## Usage

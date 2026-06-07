@@ -1,4 +1,4 @@
-// START_TEMPLATE
+// ANCHOR: main
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
 use std::sync::OnceLock;
 
@@ -12,7 +12,7 @@ static PRECALC: OnceLock<Precalc> = OnceLock::new();
 
 #[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
 pub struct Mint<const MOD: u32 = 1000000007> {
-    val: u32,
+    pub val: u32,
 }
 
 impl<const MOD: u32> Mint<MOD> {
@@ -183,7 +183,7 @@ impl<const MOD: u32> DivAssign for Mint<MOD> {
         self.val = (*self / rhs).val;
     }
 }
-// END_TEMPLATE
+// ANCHOR_END: main
 
 #[cfg(test)]
 mod tests {

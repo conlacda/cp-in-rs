@@ -27,3 +27,6 @@
 # Graph
 - [Toposort](./graph/toposort.md)
 - [SCC](./graph/scc.md)
+
+# Math
+- [Mod int](./math/mod_int.md)

@@ -10,7 +10,7 @@ static FACTORIAL_INV: OnceLock<Vec<u32>> = OnceLock::new();
 ///
 /// # Usage
 /// ```rust
-/// use rs_space::hashstr::Hash;
+/// use rs_space::string::hashstr::Hash;
 /// Hash::init(250000);
 /// let v = vec![1, 2, 3, 4, 5];
 /// let h = Hash::new(&v);
@@ -161,7 +161,7 @@ where
     ///
     /// # Example
     /// ```rust
-    /// use rs_space::hashstr::Hash;
+    /// use rs_space::string::hashstr::Hash;
     /// let v = vec![10, 20, 30, 40];
     /// Hash::init(250000);
     /// let h = Hash::new(&v);

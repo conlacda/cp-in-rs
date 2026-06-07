@@ -2,28 +2,28 @@
 
 ## Template
 ```rust
-{{#include ../../code/src/segtree.rs:segtree}}
+{{#include ../../code/src/range_query/segtree.rs:segtree}}
 ```
 
 ## Nodes
 ### SumNode
 ```rust
-{{#include ../../code/src/segtree.rs:SumNode}}
+{{#include ../../code/src/range_query/segtree.rs:SumNode}}
 ```
 
 ### MinNode
 ```rust
-{{#include ../../code/src/segtree.rs:MinNode}}
+{{#include ../../code/src/range_query/segtree.rs:MinNode}}
 ```
 
 ### MaxNode
 ```rust
-{{#include ../../code/src/segtree.rs:MaxNode}}
+{{#include ../../code/src/range_query/segtree.rs:MaxNode}}
 ```
 
 ### Subrange
 ```rust
-{{#include ../../code/src/segtree.rs:Subrange}}
+{{#include ../../code/src/range_query/segtree.rs:Subrange}}
 ```
 
 ## Usage

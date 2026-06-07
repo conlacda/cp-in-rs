@@ -2,7 +2,7 @@
 
 ## Template
 ```rust 
-{{#include ../../code/src/fwtree.rs:RangeQueryPointUpdate}}
+{{#include ../../code/src/range_query/fwtree.rs:RangeQueryPointUpdate}}
 ```
 
 ## Usage

@@ -2,7 +2,7 @@
 
 ## Template
 ```rust showLineNumbers
-{{#include ../../code/src/fwtree.rs:RangeUpdatePointQuery}}
+{{#include ../../code/src/range_query/fwtree.rs:RangeUpdatePointQuery}}
 ```
 
 ## Usage

@@ -71,7 +71,7 @@ where
     /// # Example
     ///
     /// ```rust
-    /// use rs_space::segtree::{SegTree, MaxNode};
+    /// use rs_space::range_query::segtree::{SegTree, MaxNode};
     /// let nodes: Vec<MaxNode> = (0..100).map(|v| MaxNode::new(v)).collect();
     /// let mut seg = SegTree::from(&nodes);
     /// seg.find_right(0, |range_node| range_node.val >= 10);

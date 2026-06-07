@@ -6,7 +6,7 @@ use std::ops::RangeBounds;
 ///
 /// # Usage
 /// ```rust
-/// use rs_space::fwtree::FenwickTree;
+/// use rs_space::range_query::fwtree::FenwickTree;
 /// let fw = FenwickTree::new(10);
 /// for index in 0..10 {
 ///     assert!(fw.at(index) == 0);
@@ -76,7 +76,7 @@ impl FenwickTree {
 ///
 /// # Usage
 /// ```rust
-/// use rs_space::fwtree::FwTree;
+/// use rs_space::range_query::fwtree::FwTree;
 /// let fw = FwTree::new(10);
 /// for i in 0..10 {
 ///     assert!(fw.sum(i..=i) == 0);

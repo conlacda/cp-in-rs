@@ -5,7 +5,7 @@ use std::mem::swap;
 ///
 /// # Usage
 /// ```rust
-/// use rs_space::persistent_dsu::PersistentDsu;
+/// use rs_space::datastructure::persistent_dsu::PersistentDsu;
 /// let mut dsu = PersistentDsu::new(5);
 /// dsu.merge(1, 2);
 /// assert_eq!(dsu.find(1), dsu.find(2));

@@ -6,6 +6,7 @@ use std::str;
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::dbg;
+use rs_space::math::mint::Mint;
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::set_limit::timeout_secs;
@@ -93,4 +94,10 @@ fn main() {
     let mut out = writer();
     let n: usize = scan.token();
     write!(out, "{:?}", n).unwrap();
+    const MOD: u32 = 1000000007;
+    let mut m = Mint::<MOD>::from(1000000008);
+    m -= 2.into();
+    m /= 3.into();
+    m *= 3.into();
+    dbg!(m);
 }

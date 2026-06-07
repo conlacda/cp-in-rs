@@ -1,13 +1,9 @@
-pub mod dsu;
-pub mod fwtree;
+pub mod datastructure;
 pub mod graph;
-pub mod hashstr;
 pub mod macros;
-pub mod mint;
-pub mod persistent_dsu;
+pub mod math;
 pub mod random;
+pub mod range_query;
 pub mod recursive;
-pub mod rmq;
-pub mod segtree;
 pub mod set_limit;
-pub mod weight_dsu;
+pub mod string;
