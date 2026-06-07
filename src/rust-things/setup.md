@@ -1,4 +1,4 @@
-# Competitive programming with Rust
+# Competitive programming in Rust
 
 ## Setup
 ### Install Fira font

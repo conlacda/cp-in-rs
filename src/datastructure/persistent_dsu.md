@@ -8,7 +8,7 @@
 ## Usage
 ### Init
 ```rust
-let mut dsu = PersitsentDsu::new(n);
+let mut dsu = PersistentDsu::new(n);
 ```
 
 ### Find

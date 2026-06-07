@@ -1,6 +1,19 @@
 // ANCHOR: main
 use std::mem::swap;
 
+/// Polynomial rolling hash for sequences.
+///
+/// # Usage
+/// ```rust
+/// use rs_space::persistent_dsu::PersistentDsu;
+/// let mut dsu = PersistentDsu::new(5);
+/// dsu.merge(1, 2);
+/// assert_eq!(dsu.find(1), dsu.find(2));
+/// assert!(dsu.is_same(1, 2));
+/// dsu.rollback();
+/// assert_eq!(dsu.find(1), 1);
+/// assert_eq!(dsu.find(2), 2);
+/// ```
 pub struct PersistentDsu {
     ccnum: usize,
     rank: Vec<usize>,
@@ -74,16 +87,12 @@ mod tests {
         let mut trivial: Vec<usize> = (0..n).collect();
         let q = n;
         for _ in 0..q {
-            let t = r.bool();
+            let t = r.num(0..=2);
             let u = r.num(0..n);
             let v = r.num(0..n);
             // merge
-            if t {
-                let merged = dsu.merge(u, v);
-                if merged {
-                    dsu.rollback();
-                    dsu.merge(u, v);
-                }
+            if t == 0 {
+                dsu.merge(u, v);
                 let val_u = trivial[u];
                 let val_v = trivial[v];
                 for i in 0..n {
@@ -91,10 +100,29 @@ mod tests {
                         trivial[i] = val_u;
                     }
                 }
-            } else {
+            } else if t == 1 {
                 // check same
                 let same: bool = dsu.is_same(u, v);
                 assert!(same == (trivial[u] == trivial[v]));
+            } else {
+                let ccnum = dsu.ccnum;
+                let rank = dsu.rank.clone();
+                let parent = dsu.parent.clone();
+
+                let mut merged_count = 0;
+                for _ in 0..5 {
+                    let u = r.num(0..n);
+                    let v = r.num(0..n);
+                    if dsu.merge(u, v) {
+                        merged_count += 1;
+                    }
+                }
+                for _ in 0..merged_count {
+                    dsu.rollback();
+                }
+                assert_eq!(ccnum, dsu.ccnum);
+                assert_eq!(rank, dsu.rank);
+                assert_eq!(parent, dsu.parent);
             }
         }
     }
