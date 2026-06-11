@@ -7,3 +7,4 @@ pub mod range_query;
 pub mod recursive;
 pub mod set_limit;
 pub mod string;
+pub mod techniques;

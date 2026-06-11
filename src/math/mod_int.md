@@ -35,7 +35,7 @@ n.npr(r);
 m.pow(x); // m^x
 ```
 
-### basic operation
+### basic operations
 ```rust
 let mut m: Mint<MOD> = 3.into();
 m += 3.into();

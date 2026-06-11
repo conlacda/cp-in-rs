@@ -1,12 +1,12 @@
 # Recursive
 
 ## Template
-```rust showLineNumbers
+```rust,editable
 {{#include ../../code/src/recursive.rs:main}}
 ```
 
 ## Usage
-```rust showLineNumbers
+```rust
 use crate::recursive::Callable;
 use crate::recursive::RecursiveFunction;
 

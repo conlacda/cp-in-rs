@@ -6,10 +6,10 @@ use std::str;
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::dbg;
-use rs_space::math::mint::Mint;
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::set_limit::timeout_secs;
+use rs_space::techniques::coordinate_compress::Compress;
 
 /// Same API as Scanner but nearly twice as fast, using horribly unsafe dark arts
 pub struct UnsafeScanner<R> {
@@ -90,14 +90,7 @@ fn writer() -> io::BufWriter<Box<dyn Write>> {
 fn main() {
     #[cfg(feature = "local")]
     timeout_secs(5);
-    let mut scan = scanner();
-    let mut out = writer();
-    let n: usize = scan.token();
-    write!(out, "{:?}", n).unwrap();
-    const MOD: u32 = 1000000007;
-    let mut m = Mint::<MOD>::from(1000000008);
-    m -= 2.into();
-    m /= 3.into();
-    m *= 3.into();
-    dbg!(m);
+    let c = Compress::new(&[20, 10, 40, 30]);
+    dbg!(c.original_val(0));
+    dbg!(c.down(40));
 }

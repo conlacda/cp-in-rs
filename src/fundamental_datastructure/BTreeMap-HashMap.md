@@ -1,5 +1,5 @@
 # BTreeMap/HashMap
-```rust showLineNumbers
+```rust
 use std::collections::HashMap;
 use std::collections::BTreeMap;
 
@@ -14,13 +14,13 @@ for (k, v) in &map {
 }
 ```
 **Insert**
-```rust showLineNumbers
+```rust
 map.insert(key, value);
 ```
 insert 2 lần để ghi đè value
 
 **Lấy ra value**
-```rust showLineNumbers
+```rust
 if let Some(val) = map.get(&key) {
     dbg!(val);
 }
@@ -31,7 +31,7 @@ if map.contains_key(&key) {
 ```
 
 **Cập nhật key value**
-```rust showLineNumbers
+```rust
 if let Some(value) = map.get_mut(&key) {
     *value = new_value; // *value += 3;
 }
@@ -45,6 +45,6 @@ if map.contains_key(&key) {
 Cập nhật value mà không quan tâm key đã tồn tại hay chưa, dùng `map.insert(key, value)` là xong
 
 **Remove**
-```rust showLineNumbers
+```rust
 map.remove(&key);
 ```

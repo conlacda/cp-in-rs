@@ -14,6 +14,9 @@
 - [Weight DSU](./datastructure/weight_dsu.md)
 - [Persistent DSU](./datastructure/persistent_dsu.md)
 
+# Technique
+- [Coordinate compress](./techniques/coordinate_compress.md)
+
 # String
 - [Hash String](./string/hash_string.md)
 

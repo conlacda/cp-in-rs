@@ -12,7 +12,7 @@ println!("{:?}", pq.pop()); // Some(10)
 ```
 
 **For min heap (min first)**
-```rust showLineNumbers
+```rust
 use std::cmp::Reverse;
 use std::collections::BinaryHeap;
 

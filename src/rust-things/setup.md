@@ -19,10 +19,12 @@ Sublimetext's Menu -> `Preference` -> `Settings`
 }
 ```
 
+**Theme**: install [Colorsublime](https://packagecontrol.io/packages/Colorsublime) -> `Ctrl + Shift + P` -> `ColorSublime: Install theme` -> `Art School`
+
 ### Rust build system
 Sublimetext's Menu -> `Tools` -> `Build system` -> `New Build system ...`
 
-```json showLineNumbers
+```json
 {
    // Add "cargo fmt" if LSP "lsp_format_on_save": true, is not set
   "cmd" : "cargo clippy --fix --allow-dirty --allow-no-vcs && cargo run", // cargo might needs to be a full path
@@ -43,7 +45,7 @@ Select Rust as build system `Tools` -> `Build system` -> `rust`. Now, just run *
 ### Key bindings
 `Menu` -> `Preferences` -> `Key Bindings`
 
-```json showLineNumbers
+```json
 [
     { "keys": ["f1"], "command": "build" },
     { "keys": ["f2"], "command": "cancel_build" },
@@ -67,7 +69,7 @@ LSP is used to check code immediately without compiling then running it.
 * [LSP-rust-analyzer](https://github.com/sublimelsp/LSP-rust-analyzer)
 
 `Ctrl + Shift + P` -> `Preferences: LSP Settings` then fill
-```json showLineNumbers
+```json
 // Settings in here override those in "LSP/LSP.sublime-settings"
 {
 	"lsp_format_on_save": true,
@@ -81,7 +83,7 @@ Then `Ctrl + Shift + P` -> `LSP: Toggle Diagnostics Panel`, it shows realtime er
 `Ctrl + Shift + P` -> `Install Package` -> input `Rust Enhanced`
 
 * [Rust Enhanced](https://rust-lang.github.io/rust-enhanced/install.html) -> right mouse -> Rust -> Open settings
-    ```json showLineNumbers
+    ```json
     {
 	     "folders": [
 	        { "path": "." }

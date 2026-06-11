@@ -2,19 +2,19 @@
 Range minimum/maximum query
 
 ## Template
-```rust
+```rust,editable
 {{#include ../../code/src/range_query/rmq.rs:main}}
 ```
 
 ## Usage
 ### Init
-```rust showLineNumbers
+```rust
 let mut rmq: RMQ<i64> = RMQ::default();
 rmq.set_max_mode(true).from(vec![0; 100]).build();
 ```
 
 ### Query
-```rust showLineNumbers
+```rust
 max_index = rmq.query_index(l, r);
 max_value = rmq.query_value(l, r);
 ```

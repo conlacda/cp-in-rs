@@ -1,7 +1,7 @@
 # Range update point query
 
 ## Template
-```rust showLineNumbers
+```rust,editable
 {{#include ../../code/src/range_query/fwtree.rs:RangeUpdatePointQuery}}
 ```
 

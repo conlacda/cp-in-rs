@@ -1,8 +1,6 @@
 // ANCHOR: main
 use std::mem::swap;
 
-/// Polynomial rolling hash for sequences.
-///
 /// # Usage
 /// ```rust
 /// use rs_space::datastructure::persistent_dsu::PersistentDsu;
