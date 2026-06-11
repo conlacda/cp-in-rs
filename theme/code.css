@@ -1,0 +1,249 @@
+/* =========================================================
+   Colorful Light Theme for mdBook (Highlight.js + Ace)
+   ========================================================= */
+
+/* Code blocks */
+.hljs {
+    display: block;
+    overflow-x: auto;
+
+    background: #f8fafc;
+    color: #334155;
+
+    border: 1px solid #d8dee9;
+    border-radius: 6px;
+}
+
+/* Comments */
+.hljs-comment,
+.hljs-quote {
+    color: #6b7280;
+    font-style: italic;
+}
+
+/* Keywords */
+.hljs-keyword {
+    color: #2563eb;
+    font-weight: 700;
+}
+
+/* Strings */
+.hljs-string {
+    color: #16a34a;
+}
+
+/* Numbers / literals */
+.hljs-number,
+.hljs-literal {
+    color: #ea580c;
+}
+
+/* Functions */
+.hljs-title.function_,
+.hljs-function .hljs-title {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+/* Classes / Types */
+.hljs-title.class_,
+.hljs-class .hljs-title,
+.hljs-type {
+    color: #d97706;
+    font-weight: 700;
+}
+
+/* Variables */
+.hljs-variable,
+.hljs-template-variable {
+    color: #0891b2;
+}
+
+/* Parameters */
+.hljs-params {
+    color: #c2410c;
+}
+
+/* Constants */
+.hljs-constant {
+    color: #9333ea;
+    font-weight: 600;
+}
+
+/* Builtins */
+.hljs-built_in {
+    color: #7c3aed;
+}
+
+/* Properties */
+.hljs-property {
+    color: #0f766e;
+}
+
+/* Attributes */
+.hljs-attr,
+.hljs-attribute {
+    color: #d97706;
+}
+
+/* Symbols / enum variants */
+.hljs-symbol {
+    color: #db2777;
+    font-weight: 600;
+}
+
+/* Namespaces */
+.hljs-namespace {
+    color: #0284c7;
+}
+
+/* Tags */
+.hljs-tag,
+.hljs-name {
+    color: #dc2626;
+}
+
+/* Operators */
+.hljs-operator {
+    color: #475569;
+}
+
+/* Meta / macros */
+.hljs-meta {
+    color: #e11d48;
+}
+
+/* Regex */
+.hljs-regexp {
+    color: #0d9488;
+}
+
+/* Links */
+.hljs-link {
+    color: #2563eb;
+    text-decoration: underline;
+}
+
+/* Diff */
+.hljs-addition {
+    color: #15803d;
+    background: rgba(34, 197, 94, 0.08);
+}
+
+.hljs-deletion {
+    color: #dc2626;
+    background: rgba(239, 68, 68, 0.08);
+}
+
+/* Selection */
+.hljs ::selection {
+    background: #dbeafe;
+}
+
+/* =========================================================
+   Ace Editor
+   ========================================================= */
+
+.ace_editor {
+    background: #f8fafc !important;
+    color: #334155 !important;
+}
+
+/* Gutter */
+.ace_gutter {
+    background: #f8fafc !important;
+    color: #94a3b8 !important;
+}
+
+/* Cursor */
+.ace_cursor {
+    color: #111827 !important;
+}
+
+/* Selection */
+.ace_selection {
+    background: #dbeafe !important;
+}
+
+/* Keywords */
+.ace_keyword {
+    color: #2563eb !important;
+    font-weight: 700;
+}
+
+/* Strings */
+.ace_string {
+    color: #16a34a !important;
+}
+
+/* Numbers */
+.ace_numeric {
+    color: #ea580c !important;
+}
+
+/* Functions */
+.ace_support.ace_function,
+.ace_entity.ace_name.ace_function {
+    color: #dc2626 !important;
+}
+
+/* Types */
+.ace_support.ace_type,
+.ace_storage.ace_type {
+    color: #d97706 !important;
+    font-weight: 700;
+}
+
+/* Variables */
+.ace_variable {
+    color: #0891b2 !important;
+}
+
+/* Constants */
+.ace_constant {
+    color: #9333ea !important;
+}
+
+/* Builtins */
+.ace_support.ace_class,
+.ace_support.ace_constant {
+    color: #7c3aed !important;
+}
+
+/* Comments */
+.ace_comment {
+    color: #6b7280 !important;
+    font-style: italic;
+}
+
+/* Tags */
+.ace_meta.ace_tag,
+.ace_entity.ace_name.ace_tag {
+    color: #dc2626 !important;
+}
+
+/* Attributes */
+.ace_entity.ace_other.ace_attribute-name {
+    color: #d97706 !important;
+}
+
+/* Operators */
+.ace_keyword.ace_operator {
+    color: #475569 !important;
+}
+
+/* Invalid */
+.ace_invalid {
+    color: #ffffff !important;
+    background: #dc2626 !important;
+}
+
+/* Active line */
+.ace_marker-layer .ace_active-line {
+    background: rgba(37, 99, 235, 0.05) !important;
+}
+
+/* Matching brackets */
+.ace_marker-layer .ace_bracket {
+    border: 1px solid #2563eb !important;
+}

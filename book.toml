@@ -5,6 +5,7 @@ language = "en"
 
 [output.html]
 git-repository-url = "https://github.com/conlacda/cp-in-rs"
+additional-css = ["theme/code.css"]
 
 [output.html.playground]
 editable = true

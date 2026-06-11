@@ -1,5 +1,4 @@
 // ANCHOR: RangeUpdatePointQuery
-
 use std::ops::RangeBounds;
 
 /// Fenwick tree for range update point query
