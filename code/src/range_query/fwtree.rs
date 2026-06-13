@@ -14,7 +14,7 @@ use std::ops::RangeBounds;
 /// let mut fw = FenwickTree::from(&[1, 2, 3, 4]);
 /// fw.add(0, 1, 10);
 /// assert!(fw.at(0) == 11);
-/// assert!(fw.len() == 4);
+/// assert!(fw.size() == 4);
 /// ```
 #[derive(Debug)]
 pub struct FenwickTree {
@@ -36,12 +36,12 @@ impl FenwickTree {
         fw
     }
 
-    pub fn len(&self) -> usize {
+    pub fn size(&self) -> usize {
         self.bit.len()
     }
 
     fn internal_update(&mut self, mut i: usize, val: i64) {
-        while i < self.len() {
+        while i < self.size() {
             self.bit[i] += val;
             i |= i + 1;
         }
@@ -50,13 +50,13 @@ impl FenwickTree {
     // add val to [l..=r]
     pub fn add(&mut self, l: usize, r: usize, val: i64) {
         self.internal_update(l, val);
-        if r + 1 < self.len() {
+        if r + 1 < self.size() {
             self.internal_update(r + 1, -val);
         }
     }
 
     pub fn at(&self, index: usize) -> i64 {
-        assert!(index < self.len());
+        assert!(index < self.size());
         let mut ans = 0;
         let mut i = index as i64;
 
@@ -82,7 +82,7 @@ impl FenwickTree {
 /// }
 ///
 /// let mut fw = FwTree::from(&[1, 2, 3, 4]);
-/// assert!(fw.len() == 4);
+/// assert!(fw.size() == 4);
 /// fw.add(0, 9);
 /// fw.set(1, 5);
 /// assert_eq!(fw.sum(0..4), 22);
@@ -110,13 +110,13 @@ impl FwTree {
         fw
     }
 
-    pub fn len(&self) -> usize {
+    pub fn size(&self) -> usize {
         self.bit.len()
     }
 
     pub fn add(&mut self, mut index: usize, delta: i64) {
-        assert!(index < self.len());
-        while index < self.len() {
+        assert!(index < self.size());
+        while index < self.size() {
             self.bit[index] += delta;
             index = index | (index + 1);
         }
@@ -135,10 +135,10 @@ impl FwTree {
         let r = match range.end_bound() {
             std::ops::Bound::Included(&x) => x,
             std::ops::Bound::Excluded(&x) => x - 1,
-            std::ops::Bound::Unbounded => self.len() - 1,
+            std::ops::Bound::Unbounded => self.size() - 1,
         };
 
-        assert!(l <= r && r <= self.len());
+        assert!(l <= r && r <= self.size());
 
         let sum_to = |mut r: usize| -> i64 {
             let mut result = 0;
@@ -167,7 +167,7 @@ impl FwTree {
     // sum[start_index:R] >= k
     pub fn right_index_with_sum_from_k(&self, start_index: usize, k: i64) -> Option<usize> {
         let mut l = start_index;
-        let mut r = self.len() - 1;
+        let mut r = self.size() - 1;
         while l < r {
             let mid = (l + r) / 2;
             if self.sum(start_index..=mid) >= k {

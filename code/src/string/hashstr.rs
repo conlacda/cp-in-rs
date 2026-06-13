@@ -138,9 +138,9 @@ where
         );
         let one_way_hash = |s: &[T]| -> u32 {
             let mut hash_value: i64 = 0;
-            for i in 0..s.len() {
+            for (i, &si) in s.iter().enumerate() {
                 hash_value =
-                    (hash_value + s[i].into() * FACTORIAL.get().unwrap()[i] as i64) % MOD as i64;
+                    (hash_value + si.into() * FACTORIAL.get().unwrap()[i] as i64) % MOD as i64;
             }
             if hash_value < 0 {
                 hash_value += MOD as i64;
@@ -153,7 +153,7 @@ where
         (forward as u64) << 32 | (backward as u64)
     }
 
-    fn len(&self) -> usize {
+    fn size(&self) -> usize {
         self.s.len()
     }
 
@@ -168,16 +168,19 @@ where
     /// assert_eq!(h.substr(1, 2), Hash::once(&[20, 30]));
     /// ```
     pub fn substr(&self, start: usize, end: usize) -> u64 {
-        let n = self.s.len();
         let one_way_hash = |start: usize, end: usize, ps_hash: &[u32]| -> u32 {
-            assert!(end < n);
+            assert!(end < self.size());
             let a = ps_hash[end + 1] as u64;
             let b = ps_hash[start] as u64;
             let res = (a + MOD as u64 - b) % MOD as u64;
             (res * (FACTORIAL_INV.get().unwrap()[start] as u64) % MOD as u64) as u32
         };
         (one_way_hash(start, end, &self.prefix_hash) as u64) << 32
-            | one_way_hash(n - 1 - end, n - 1 - start, &self.suffix_hash) as u64
+            | one_way_hash(
+                self.size() - 1 - end,
+                self.size() - 1 - start,
+                &self.suffix_hash,
+            ) as u64
     }
 
     /// Returns the hash of a segment on a circular array.
@@ -211,7 +214,7 @@ where
     /// Return the longest length of common prefix of s[start1..] & s[start2..]
     pub fn common_prefix(&self, start1: usize, start2: usize) -> usize {
         let mut l = 0;
-        let mut r = (self.len() - start1).min(self.len() - start2);
+        let mut r = (self.size() - start1).min(self.size() - start2);
         while l < r {
             let mut mid = (l + r) / 2;
             if mid * 2 < l + r {

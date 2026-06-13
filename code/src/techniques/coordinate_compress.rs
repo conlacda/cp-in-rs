@@ -39,14 +39,10 @@ where
         Self { values, compressed }
     }
 
-    pub fn len(&self) -> usize {
-        self.values.len()
-    }
-
     pub fn up(&self, val: T) -> Option<usize> {
         let i = self.values.partition_point(|x| x < &val);
 
-        if i < self.len() { Some(i) } else { None }
+        if i < self.values.len() { Some(i) } else { None }
     }
 
     pub fn down(&self, val: T) -> Option<usize> {
