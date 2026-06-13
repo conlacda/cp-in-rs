@@ -6,7 +6,7 @@
 ```
 
 ## Usage
-```rust
+```rust,ignore
 let mut dsu = WeightDsu::new(n);
 dsu.find(1);
 dsu.merge(a, b, dist); // height[a] - height[b] = dist

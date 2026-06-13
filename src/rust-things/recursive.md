@@ -6,7 +6,7 @@
 ```
 
 ## Usage
-```rust
+```rust,ignore
 use crate::recursive::Callable;
 use crate::recursive::RecursiveFunction;
 

@@ -7,23 +7,23 @@
 
 ## Usage
 ### Init
-```rust
+```rust,ignore
 let mut dsu = PersistentDsu::new(n);
 ```
 
 ### Find
-```rust
+```rust,ignore
 let root = dsu.find(a);
 ```
 
 ### Merge, rollback
-```rust
+```rust,ignore
 let merge = dsu.merge(a, b);
 dsu.rollback();
 ```
 
 ### Check if same group
-```rust
+```rust,ignore
 dsu.is_same(a, b);
 ```
 

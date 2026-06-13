@@ -6,7 +6,7 @@
 ```
 
 ## Usage
-```rust
+```rust,ignore
 let mut dsu = DSU::new(n);
 dsu.find(u);
 dsu.merge(u, v);

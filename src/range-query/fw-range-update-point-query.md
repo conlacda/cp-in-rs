@@ -7,17 +7,17 @@
 
 ## Usage
 ### Init
-```rust
+```rust,ignore
 let mut fw = FenwickTree::new(n);
 let mut fw = FenwickTree::from(&vec);
 ```
 
 ### Update
-```rust
+```rust,ignore
 fw.add(l, r, val);
 ```
 
 ### Query
-```rust
+```rust,ignore
 fw.at(index);
 ```

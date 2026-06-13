@@ -7,7 +7,7 @@
 
 ## Usage
 ### Init
-```rust
+```rust,ignore
 const MOD: u32 = 1000000007;
 let m: Mint<MOD> = 1000000008.into();
 let m = Mint::<MOD>::from(1000000008);
@@ -15,28 +15,28 @@ assert!(m.val == 1);
 ```
 
 ### inv
-```rust
+```rust,ignore
 assert!(m * m.inv() == 1);
 ```
 
 ### factor
-```rust
+```rust,ignore
 m.factor(); // m! = 1*2*3*...*m
 ```
 
 ### ncr, npr
-```rust
+```rust,ignore
 n.ncr(r);
 n.npr(r);
 ```
 
 ### pow
-```rust
+```rust,ignore
 m.pow(x); // m^x
 ```
 
 ### basic operations
-```rust
+```rust,ignore
 let mut m: Mint<MOD> = 3.into();
 m += 3.into();
 m -= 2.into();
