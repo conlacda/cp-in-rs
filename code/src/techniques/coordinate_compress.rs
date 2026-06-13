@@ -2,7 +2,7 @@
 use std::collections::HashMap;
 use std::hash::Hash;
 
-/// # Usage
+/// # Example
 /// ```rust
 /// use rs_space::techniques::coordinate_compress::Compress;
 /// let c = Compress::new(&[20, 40, 10, 30]); // compress = [1, 3, 0, 2];

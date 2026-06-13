@@ -31,5 +31,8 @@
 - [Toposort](./graph/toposort.md)
 - [SCC](./graph/scc.md)
 
+# Tree
+- [Tree](./tree/mix.md)
+
 # Math
 - [Mod int](./math/mod_int.md)

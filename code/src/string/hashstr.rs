@@ -8,7 +8,7 @@ static FACTORIAL_INV: OnceLock<Vec<u32>> = OnceLock::new();
 
 /// Polynomial rolling hash for sequences.
 ///
-/// # Usage
+/// # Example
 /// ```rust
 /// use rs_space::string::hashstr::Hash;
 /// Hash::init(250000);
