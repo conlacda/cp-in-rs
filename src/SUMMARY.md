@@ -33,6 +33,7 @@
 
 # Tree
 - [Tree](./tree/mix.md)
+- [Binary jumping](./tree/binary_jumping.md)
 
 # Math
 - [Mod int](./math/mod_int.md)

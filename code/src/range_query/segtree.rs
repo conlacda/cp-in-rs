@@ -1,6 +1,6 @@
 // ANCHOR: segtree
 pub trait Node: Default + Clone + Copy {
-    fn combine(&self, other: Self) -> Self;
+    fn combine(&self, other: &Self) -> Self;
     fn right_to_left(&self) -> Self {
         *self
     }
@@ -22,7 +22,7 @@ where
             dat[n + i - 1] = v[i];
         }
         for i in (0..n - 1).rev() {
-            dat[i] = dat[i * 2 + 1].combine(dat[i * 2 + 2]);
+            dat[i] = dat[i * 2 + 1].combine(&dat[i * 2 + 2]);
         }
         Self { n, dat }
     }
@@ -33,7 +33,7 @@ where
 
         while index > 0 {
             index = (index - 1) / 2;
-            self.dat[index] = self.dat[index * 2 + 1].combine(self.dat[index * 2 + 2]);
+            self.dat[index] = self.dat[index * 2 + 1].combine(&self.dat[index * 2 + 2]);
         }
     }
 
@@ -45,15 +45,15 @@ where
         r += self.n;
         while l < r {
             if (l & 1) == 0 {
-                lnode = lnode.combine(self.dat[l]);
+                lnode = lnode.combine(&self.dat[l]);
             }
             if (r & 1) == 0 {
-                rnode = self.dat[r - 1].combine(rnode);
+                rnode = self.dat[r - 1].combine(&rnode);
             }
             l /= 2;
             r = (r - 1) / 2;
         }
-        lnode.combine(rnode)
+        lnode.combine(&rnode)
     }
 
     pub fn at(&self, index: usize) -> T {
@@ -141,9 +141,9 @@ impl SumNode {
 }
 
 impl Node for SumNode {
-    fn combine(&self, other: Self) -> Self {
+    fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
-            return other;
+            return *other;
         }
         if !other.has_value {
             return *self;
@@ -170,9 +170,9 @@ impl MinNode {
 }
 
 impl Node for MinNode {
-    fn combine(&self, other: Self) -> Self {
+    fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
-            return other;
+            return *other;
         }
         if !other.has_value {
             return *self;
@@ -199,9 +199,9 @@ impl MaxNode {
 }
 
 impl Node for MaxNode {
-    fn combine(&self, other: Self) -> Self {
+    fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
-            return other;
+            return *other;
         }
         if !other.has_value {
             return *self;
@@ -240,9 +240,9 @@ impl Subrange {
 }
 
 impl Node for Subrange {
-    fn combine(&self, other: Self) -> Self {
+    fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
-            return other;
+            return *other;
         }
         if !other.has_value {
             return *self;
