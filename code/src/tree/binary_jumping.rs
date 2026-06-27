@@ -1,5 +1,5 @@
 // ANCHOR: main
-struct BinaryJumping {
+pub struct BinaryJumping {
     max_depth: usize,
     up: Vec<Vec<usize>>,
 }

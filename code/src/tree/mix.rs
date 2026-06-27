@@ -1,4 +1,3 @@
-#![allow(unused)]
 // ANCHOR: eulertour
 use crate::recursive::Callable2;
 use crate::recursive::RecursiveFunction2;
@@ -29,7 +28,6 @@ pub fn make_eulertour(tree: &[Vec<usize>], root: usize) -> (Vec<usize>, Vec<(usi
 #[cfg(test)]
 mod tests {
     use super::*;
-    use crate::random::Random;
 
     #[test]
     fn test_euler_tour() {
