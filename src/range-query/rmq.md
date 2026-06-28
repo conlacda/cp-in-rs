@@ -9,8 +9,7 @@ Range minimum/maximum query
 ## Usage
 ### Init
 ```rust,ignore
-let mut rmq: RMQ<i64> = RMQ::default();
-rmq.set_max_mode(true).from(vec![0; 100]).build();
+let rmq: RMQ<i64> = RMQ::new(&vec![], true);
 ```
 
 ### Query

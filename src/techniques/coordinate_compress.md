@@ -18,9 +18,9 @@ let c = Compress::new(&[20, 40, 10, 30]);
 Run in `O(logN)`
 ```rust,ignore
 // `up(x)` returns the compressed index of the smallest value >= x.
-assert!(c.up(21) == Some(2));
+assert!(c.up(&21) == Some(2));
 // `down(x)` returns the compressed index of the largest value <= x.
-assert!(c.down(21) == Some(1));
+assert!(c.down(&21) == Some(1));
 ```
 
 ### Get compressed value of a[index]

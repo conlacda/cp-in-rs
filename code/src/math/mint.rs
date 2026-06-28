@@ -174,13 +174,13 @@ impl<const MOD: u32> MulAssign for Mint<MOD> {
 impl<const MOD: u32> Div for Mint<MOD> {
     type Output = Self;
     fn div(self, rhs: Self) -> Self::Output {
-        self * rhs.inv()
+        self.mul(rhs.inv())
     }
 }
 
 impl<const MOD: u32> DivAssign for Mint<MOD> {
     fn div_assign(&mut self, rhs: Self) {
-        self.val = (*self / rhs).val;
+        *self = self.div(rhs);
     }
 }
 // ANCHOR_END: main

@@ -27,7 +27,7 @@ static FACTORIAL_INV: OnceLock<Vec<u32>> = OnceLock::new();
 ///
 /// # Notes
 /// - All indices are **inclusive**
-/// - Call **init()** before using
+/// - Call ** `init()` ** before using
 pub struct Hash<T> {
     pub s: Vec<T>,
     prefix_hash: Vec<u32>,
@@ -150,7 +150,7 @@ where
         let forward = one_way_hash(s);
         let reversed_s: Vec<T> = s.iter().rev().copied().collect();
         let backward = one_way_hash(&reversed_s);
-        (forward as u64) << 32 | (backward as u64)
+        u64::from(forward) << 32 | u64::from(backward)
     }
 
     fn size(&self) -> usize {
@@ -173,14 +173,14 @@ where
             let a = ps_hash[end + 1] as u64;
             let b = ps_hash[start] as u64;
             let res = (a + MOD as u64 - b) % MOD as u64;
-            (res * (FACTORIAL_INV.get().unwrap()[start] as u64) % MOD as u64) as u32
+            (res * u64::from(FACTORIAL_INV.get().unwrap()[start]) % u64::from(MOD)) as u32
         };
-        (one_way_hash(start, end, &self.prefix_hash) as u64) << 32
-            | one_way_hash(
+        u64::from(one_way_hash(start, end, &self.prefix_hash)) << 32
+            | u64::from(one_way_hash(
                 self.size() - 1 - end,
                 self.size() - 1 - start,
                 &self.suffix_hash,
-            ) as u64
+            ))
     }
 
     /// Returns the hash of a segment on a circular array.

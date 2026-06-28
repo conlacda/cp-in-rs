@@ -7,23 +7,19 @@ pub struct RMQ<T: Clone> {
 }
 
 impl<T: Clone + Ord> RMQ<T> {
-    pub fn set_max_mode(&mut self, max_mode: bool) -> &mut Self {
-        self.max_mode = max_mode;
-        self
-    }
-
-    pub fn from(&mut self, val: Vec<T>) -> &mut Self {
-        self.values = val;
-        self
+    pub fn new(values: &[T], max_mode: bool) -> Self {
+        let mut rmq = Self {
+            values: values.to_vec(),
+            range_low: Vec::new(),
+            max_mode,
+        };
+        rmq.build();
+        rmq
     }
 
     pub fn build(&mut self) {
         let n = self.values.len();
-        let levels = if let Some(lb) = self.largest_bit(n) {
-            lb + 1
-        } else {
-            0
-        };
+        let levels = self.floor_log2(n) + 1;
         self.range_low.resize(levels, Vec::new());
         for k in 0..levels {
             self.range_low[k].resize(n - (1 << k) + 1, 0);
@@ -41,12 +37,10 @@ impl<T: Clone + Ord> RMQ<T> {
         }
     }
 
-    fn largest_bit(&self, x: usize) -> Option<usize> {
-        if x == 0 {
-            None
-        } else {
-            Some(x.ilog2() as usize)
-        }
+    fn floor_log2(&self, x: usize) -> usize {
+        assert!(x > 0);
+        (usize::BITS - 1 - x.leading_zeros()) as usize
+        // Some(x.ilog2() as usize)
     }
 
     fn better_index(&self, a: usize, b: usize) -> usize {
@@ -67,7 +61,7 @@ impl<T: Clone + Ord> RMQ<T> {
         if l == r {
             return l;
         }
-        let level = self.largest_bit(r - l).unwrap();
+        let level = self.floor_log2(r - l);
         self.better_index(
             self.range_low[level][l],
             self.range_low[level][r - (1 << level)],
@@ -89,8 +83,7 @@ mod tests {
         let mut r = Random::new();
         let v = r.vector(5000, i64::MIN..i64::MAX);
         let n = v.len();
-        let mut rmq: RMQ<i64> = RMQ::default();
-        rmq.set_max_mode(true).from(v.clone()).build();
+        let rmq: RMQ<i64> = RMQ::new(&v, true);
         for _ in 0..500 {
             let l = r.num(0..n);
             let r = r.num(l..n);
@@ -111,10 +104,9 @@ mod tests {
     #[test]
     fn test_min_mode() {
         let mut r = Random::new();
-        let mut rmq: RMQ<i64> = RMQ::default();
         let v = r.vector(5000, i64::MIN..i64::MAX);
         let n = v.len();
-        rmq.from(v.clone()).set_max_mode(false).build();
+        let rmq: RMQ<i64> = RMQ::new(&v, false);
         for _ in 0..500 {
             let l = r.num(0..n);
             let r = r.num(l..n);
@@ -136,10 +128,9 @@ mod tests {
     #[test]
     fn test_narrow_range() {
         let mut r = Random::new();
-        let mut rmq: RMQ<i64> = RMQ::default();
         let v = r.vector(5000, -10..=10);
         let n = v.len();
-        rmq.set_max_mode(true).from(v.clone()).build();
+        let rmq: RMQ<i64> = RMQ::new(&v, true);
         for _ in 0..500 {
             let l = r.num(0..n);
             let r = r.num(l..n);

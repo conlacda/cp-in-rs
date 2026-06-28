@@ -11,4 +11,6 @@ default = ["local"]
 local = []
 
 [lints.clippy]
-suspicious_arithmetic_impl = "allow"
+all = "warn"
+pedantic = "allow"
+nursery = "allow"

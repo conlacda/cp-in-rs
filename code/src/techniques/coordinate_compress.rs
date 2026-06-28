@@ -7,9 +7,9 @@ use std::hash::Hash;
 /// use rs_space::techniques::coordinate_compress::Compress;
 /// let c = Compress::new(&[20, 40, 10, 30]); // compress = [1, 3, 0, 2];
 /// // `up(x)` returns the compressed index of the smallest value >= x.
-/// assert!(c.up(21) == Some(2));
+/// assert!(c.up(&21) == Some(2));
 /// // `down(x)` returns the compressed index of the largest value <= x.
-/// assert!(c.down(21) == Some(1));
+/// assert!(c.down(&21) == Some(1));
 /// // c.by_index(index) = compress of a[index]
 /// assert!(c.by_index(0) == 1);
 /// // Convert a compressed index back to the original value.
@@ -39,14 +39,14 @@ where
         Self { values, compressed }
     }
 
-    pub fn up(&self, val: T) -> Option<usize> {
-        let i = self.values.partition_point(|x| x < &val);
+    pub fn up(&self, val: &T) -> Option<usize> {
+        let i = self.values.partition_point(|x| x < val);
 
         if i < self.values.len() { Some(i) } else { None }
     }
 
-    pub fn down(&self, val: T) -> Option<usize> {
-        let i = self.values.partition_point(|x| x <= &val);
+    pub fn down(&self, val: &T) -> Option<usize> {
+        let i = self.values.partition_point(|x| x <= val);
 
         if i > 0 { Some(i - 1) } else { None }
     }
@@ -77,18 +77,18 @@ mod tests {
         v.dedup();
 
         // test up
-        for (index, value) in v.iter().enumerate() {
-            assert!(c.up(*value - 1).unwrap() == index);
-            assert!(c.up(*value).unwrap() == index);
+        for (index, &value) in v.iter().enumerate() {
+            assert!(c.up(&(value - 1)).unwrap() == index);
+            assert!(c.up(&value).unwrap() == index);
         }
-        assert!(c.up(v.last().unwrap() + 1) == None);
+        assert!(c.up(&(v.last().unwrap() + 1)) == None);
 
         // test down
-        for (index, value) in v.iter().enumerate() {
-            assert!(c.down(*value + 1).unwrap() == index);
-            assert!(c.down(*value).unwrap() == index);
+        for (index, &value) in v.iter().enumerate() {
+            assert!(c.down(&(value + 1)).unwrap() == index);
+            assert!(c.down(&value).unwrap() == index);
         }
-        assert!(c.down(v.first().unwrap() - 1) == None);
+        assert!(c.down(&(v[0] - 1)) == None);
 
         // original_value
         for (index, value) in v.iter().enumerate() {
@@ -97,7 +97,7 @@ mod tests {
 
         // by_index
         for index in 0..100 {
-            assert!(c.by_index(index) == c.up(a[index]).unwrap());
+            assert!(c.by_index(index) == c.up(&a[index]).unwrap());
         }
     }
 }

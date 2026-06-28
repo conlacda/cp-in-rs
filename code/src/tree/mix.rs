@@ -11,7 +11,7 @@ pub fn make_eulertour(tree: &[Vec<usize>], root: usize) -> (Vec<usize>, Vec<(usi
         eulertour.push(u);
         inout[u].0 = clock;
         clock += 1;
-        for &v in tree[u].iter() {
+        for &v in &tree[u] {
             if v != p {
                 dfs.call(v, u);
             }

@@ -10,15 +10,13 @@ impl BinaryJumping {
         let n = parent.len();
         let log2 = max_depth.next_power_of_two().ilog2() as usize;
         let mut up = vec![vec![0; n]; log2 + 1];
-        for i in 0..n {
-            up[0][i] = parent[i];
-        }
+        up[0][..n].copy_from_slice(&parent[..n]);
         for k in 1..=log2 {
             for i in 0..n {
                 up[k][i] = up[k - 1][up[k - 1][i]];
             }
         }
-        Self { up, max_depth }
+        Self { max_depth, up }
     }
     pub fn kth_parent(&self, mut node: usize, mut k: usize) -> usize {
         assert!(k <= self.max_depth, "k exceeds max_depth");
