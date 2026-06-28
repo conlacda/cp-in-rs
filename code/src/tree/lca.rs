@@ -38,14 +38,12 @@ impl LCA {
     fn make_eulertour(tree: &[Vec<usize>], root: usize) -> Euler {
         let n = tree.len();
         let mut dep: usize = 0;
-        let mut first_in: Vec<usize> = vec![usize::MAX; n];
+        let mut first_in: Vec<usize> = vec![0; n];
         let mut tour = vec![];
         let mut depth = vec![];
         let mut dfs = RecursiveFunction2::new(|dfs, node: usize, parent: usize| {
             dep += 1;
-            if first_in[node] == usize::MAX {
-                first_in[node] = tour.len();
-            }
+            first_in[node] = tour.len();
             depth.push(dep);
             tour.push(node);
             for &child in &tree[node] {
