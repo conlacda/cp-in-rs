@@ -49,7 +49,7 @@ impl<const MOD: u32> Mint<MOD> {
 
     #[inline]
     fn normalize(v: i64) -> u32 {
-        let mut val: i64 = v % MOD as i64;
+        let mut val = v % MOD as i64;
         if val < 0 {
             val += MOD as i64;
         }
