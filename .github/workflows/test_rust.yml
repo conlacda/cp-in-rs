@@ -9,6 +9,10 @@ jobs:
   test_rs_templates:
     runs-on: ubuntu-latest
 
+    defaults:
+      run:
+        working-directory: code
+
     steps:
       - uses: actions/checkout@v4
 
@@ -28,6 +32,5 @@ jobs:
 
       - name: Run Rust tests with nextest
         run: |
-          cd code
-          cargo nextest run --stress-count 100 && cargo test --doc
-          # cargo nextest run --stress-count 1000 -- <test-name>
+          cargo nextest run --stress-count 100
+          cargo test --doc
