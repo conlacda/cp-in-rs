@@ -18,7 +18,7 @@ impl BinaryJumping {
         }
         Self { max_depth, up }
     }
-    pub fn kth_parent(&self, mut node: usize, mut k: usize) -> usize {
+    pub fn kth_ancestor(&self, mut node: usize, mut k: usize) -> usize {
         assert!(k <= self.max_depth, "k exceeds max_depth");
         let mut bit = 0;
         while k != 0 {
@@ -61,7 +61,7 @@ mod tests {
         for _ in 0..100 {
             let mut node = r.num(0..n);
             let k = r.num(0..=max_depth);
-            let expected = bj.kth_parent(node, k);
+            let expected = bj.kth_ancestor(node, k);
             let actual = (|| {
                 for _i in 0..k {
                     node = parent[node];

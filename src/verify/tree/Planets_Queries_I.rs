@@ -107,7 +107,7 @@ impl BinaryJumping {
         }
         Self { up, max_depth }
     }
-    pub fn kth_parent(&self, mut node: usize, mut k: usize) -> usize {
+    pub fn kth_ancestor(&self, mut node: usize, mut k: usize) -> usize {
         assert!(k <= self.max_depth, "k exceeds max_depth");
         let mut bit = 0;
         while k != 0 {
@@ -138,6 +138,6 @@ fn main() {
         let mut node: usize = scan.token();
         node -= 1;
         let k: usize = scan.token();
-        writeln!(out, "{:?}", bj.kth_parent(node, k) + 1).unwrap();
+        writeln!(out, "{:?}", bj.kth_ancestor(node, k) + 1).unwrap();
     }
 }

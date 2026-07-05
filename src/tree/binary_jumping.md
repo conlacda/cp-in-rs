@@ -9,7 +9,7 @@
 ### Usage
 ```rust,ignore
 let bj = BinaryJumping::new(&parent, max_query_depth);
-let node = bj.kth_parent(cur_node, k);
+let node = bj.kth_ancestor(cur_node, k);
 ```
 
 ### Practice problems

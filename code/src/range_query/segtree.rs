@@ -1,5 +1,6 @@
 // ANCHOR: segtree
 pub trait Node: Default + Clone + Copy {
+    fn new(val: i64) -> Self;
     fn combine(&self, other: &Self) -> Self;
     fn right_to_left(&self) -> Self {
         *self
@@ -71,7 +72,7 @@ where
     /// # Example
     ///
     /// ```rust
-    /// use rs_space::range_query::segtree::{SegTree, MaxNode};
+    /// use rs_space::range_query::segtree::{Node, SegTree, MaxNode};
     /// let nodes: Vec<MaxNode> = (0..100).map(|v| MaxNode::new(v)).collect();
     /// let mut seg = SegTree::from(&nodes);
     /// seg.find_right(0, |range_node| range_node.val >= 10);
@@ -131,16 +132,13 @@ pub struct SumNode {
     pub has_value: bool,
 }
 
-impl SumNode {
-    pub fn new(val: i64) -> Self {
+impl Node for SumNode {
+    fn new(val: i64) -> Self {
         Self {
             val,
             has_value: true,
         }
     }
-}
-
-impl Node for SumNode {
     fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
             return *other;
@@ -160,16 +158,13 @@ pub struct MinNode {
     pub has_value: bool,
 }
 
-impl MinNode {
-    pub fn new(val: i64) -> Self {
+impl Node for MinNode {
+    fn new(val: i64) -> Self {
         Self {
             val,
             has_value: true,
         }
     }
-}
-
-impl Node for MinNode {
     fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
             return *other;
@@ -189,16 +184,13 @@ pub struct MaxNode {
     pub has_value: bool,
 }
 
-impl MaxNode {
-    pub fn new(val: i64) -> Self {
+impl Node for MaxNode {
+    fn new(val: i64) -> Self {
         Self {
             val,
             has_value: true,
         }
     }
-}
-
-impl Node for MaxNode {
     fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
             return *other;
@@ -224,8 +216,8 @@ pub struct Subrange {
     pub has_value: bool,
 }
 
-impl Subrange {
-    pub fn new(val: i64) -> Self {
+impl Node for Subrange {
+    fn new(val: i64) -> Self {
         Self {
             max_mid: val,
             min_mid: val,
@@ -237,9 +229,6 @@ impl Subrange {
             has_value: true,
         }
     }
-}
-
-impl Node for Subrange {
     fn combine(&self, other: &Self) -> Self {
         if !self.has_value {
             return *other;
