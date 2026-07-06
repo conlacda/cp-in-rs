@@ -8,19 +8,20 @@
 ## Usage
 ### Init
 ```rust,ignore
-let mut hld = HLD::new(&graph, &weight);
+let mut hld = HLD::new(&tree, &weight);
+hld.set_weight_on_nodes(true); // weight on node OR weight on edge?
 ```
 
 ### Set
 ```rust,ignore
 hld.set_node(u: usize, node: Node);
-hld.set_edge(u: usize, v: usize, node: Node);
+hld.set_edge((u, v): (usize, usize), node: Node);
 ```
 
 ### Query
 ```rust,ignore
 hld.query_subtree(root: usize);
-hld.queyry_path(u: usize, v: usize);
+hld.query_path(u: usize, v: usize);
 ```
 
 ### Distance

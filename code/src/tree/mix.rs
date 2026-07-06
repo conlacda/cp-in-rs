@@ -25,6 +25,22 @@ pub fn make_eulertour(tree: &[Vec<usize>], root: usize) -> (Vec<usize>, Vec<(usi
 }
 // ANCHOR_END: eulertour
 
+// ANCHOR: tree_depth
+pub fn tree_depth(tree: &[Vec<usize>], root: usize) -> Vec<usize> {
+    let mut depth = vec![0; tree.len()];
+    let mut dfs = RecursiveFunction2::new(|dfs, u: usize, p: usize| {
+        for &v in &tree[u] {
+            if v != p {
+                depth[v] = depth[u] + 1;
+                dfs.call(v, u);
+            }
+        }
+    });
+    dfs.call(root, root);
+    depth
+}
+// ANCHOR_END: tree_depth
+
 #[cfg(test)]
 mod tests {
     use super::*;
