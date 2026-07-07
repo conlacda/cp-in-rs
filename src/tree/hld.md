@@ -8,7 +8,7 @@
 ## Usage
 ### Init
 ```rust,ignore
-let mut hld = HLD::new(&tree, &weight);
+let mut hld: HLD<dyn Node> = HLD::new(&tree, &weight);
 hld.set_weight_on_nodes(true); // weight on node OR weight on edge?
 ```
 
@@ -32,3 +32,5 @@ hld.distance(u: usize, v: usize);
 ### Practice problems
 - [Path Queries II](https://cses.fi/problemset/task/2134/)
   - [Solution](../verify/tree/Path_Queries_II.rs)
+- [G - Distance Queries on a Tree](https://atcoder.jp/contests/abc294/tasks/abc294_g)
+  - [Solution](https://atcoder.jp/contests/abc294/submissions/77271110)

@@ -8,6 +8,8 @@ use std::str;
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::dbg;
+#[cfg(not(feature = "local"))]
+macro_rules! dbg {($($arg:tt)*) => {};}
 #[cfg(feature = "local")]
 #[allow(unused_imports)]
 use rs_space::set_limit::timeout_secs;
