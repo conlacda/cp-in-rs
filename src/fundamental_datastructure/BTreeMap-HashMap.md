@@ -17,9 +17,9 @@ for (k, v) in &map {
 ```rust
 map.insert(key, value);
 ```
-insert 2 lần để ghi đè value
+Insert again with the same key to overwrite its value.
 
-**Lấy ra value**
+**Get a value**
 ```rust
 if let Some(val) = map.get(&key) {
     dbg!(val);
@@ -30,7 +30,7 @@ if map.contains_key(&key) {
 }
 ```
 
-**Cập nhật key value**
+**Update a value**
 ```rust
 if let Some(value) = map.get_mut(&key) {
     *value = new_value; // *value += 3;
@@ -42,7 +42,7 @@ if map.contains_key(&key) {
     map.get_mut(&2).unwrap() += 3;
 }
 ```
-Cập nhật value mà không quan tâm key đã tồn tại hay chưa, dùng `map.insert(key, value)` là xong
+To set a value regardless of whether the key already exists, simply use `map.insert(key, value)`.
 
 **Remove**
 ```rust
