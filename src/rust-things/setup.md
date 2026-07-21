@@ -1,8 +1,6 @@
 # Competitive programming in Rust
 
-## Setup
-### Install Fira font
-See [offical document](https://github.com/tonsky/FiraCode)
+## Setup 
 
 ### Sublimetext
 Sublimetext's Menu -> `Preference` -> `Settings`
@@ -96,9 +94,9 @@ Then `Ctrl + Shift + P` -> `LSP: Toggle Diagnostics Panel`, it shows realtime er
     ```
     To enable it, `right mouse` -> `Rust` -> `On-save checking`, now everytime, we press `Ctrl + S` or sublime text saves file, it will run `clippy` (pretty annoying if we want speed like in a contest)
 
-## Other
-### Kill sublimetext
-In case sublimetext hang too long
-```shell
-killall sublime_text
+### Bundle to a single file
+Write the code in main.rs, then bundle everything into a single file.
+```bash
+cargo bundle # generate submission.rs
+cargo bundle -c # bundle then copy to clipboard
 ```

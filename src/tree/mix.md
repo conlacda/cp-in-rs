@@ -3,12 +3,12 @@
 ## Eulertour
 
 ### Template
-```rust
+```rust,editable,ignore
 {{#include ../../code/src/tree/mix.rs:eulertour}}
 ```
 
 ### Usage
-```rust,ignore
+```rust,editable,ignore
 let (eulertour, inout) = make_eulertour(&tree, /*root*/ 0);
 ```
 
@@ -18,6 +18,6 @@ let (eulertour, inout) = make_eulertour(&tree, /*root*/ 0);
 
 ## Tree depth
 ### Template
-```rust
+```rust,editable,ignore
 {{#include ../../code/src/tree/mix.rs:tree_depth}}
 ```

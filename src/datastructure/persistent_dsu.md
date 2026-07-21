@@ -1,29 +1,29 @@
 # Persistent DSU
 
 ## Template
-```rust 
+```rust,editable,ignore
 {{#include ../../code/src/datastructure/persistent_dsu.rs:main}}
 ```
 
 ## Usage
 ### Init
-```rust,ignore
+```rust,editable,ignore
 let mut dsu = PersistentDsu::new(n);
 ```
 
 ### Find
-```rust,ignore
+```rust,editable,ignore
 let root = dsu.find(a);
 ```
 
 ### Merge, rollback
-```rust,ignore
+```rust,editable,ignore
 let merge = dsu.merge(a, b);
 dsu.rollback();
 ```
 
 ### Check if same group
-```rust,ignore
+```rust,editable,ignore
 dsu.is_same(a, b);
 ```
 

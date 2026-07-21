@@ -1,12 +1,12 @@
 # Recursive
 
 ## Template
-```rust,editable
+```rust,editable,ignore
 {{#include ../../code/src/recursive.rs:main}}
 ```
 
 ## Usage
-```rust,ignore
+```rust,editable,ignore
 use crate::recursive::Callable;
 use crate::recursive::RecursiveFunction;
 

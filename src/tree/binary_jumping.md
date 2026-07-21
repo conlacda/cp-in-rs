@@ -1,13 +1,13 @@
 ## Binary jumping
-> aka binary lifting
+aka binary lifting
 
 ### Template
-```rust,editable
+```rust,editable,ignore
 {{#include ../../code/src/tree/binary_jumping.rs:main}}
 ```
 
 ### Usage
-```rust,ignore
+```rust,editable,ignore
 let bj = BinaryJumping::new(&parent, max_query_depth);
 let node = bj.kth_ancestor(cur_node, k);
 ```

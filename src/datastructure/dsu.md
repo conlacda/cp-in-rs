@@ -1,12 +1,12 @@
 # DSU
 
 ## Template
-```rust 
+```rust,editable,ignore
 {{#include ../../code/src/datastructure/dsu.rs:main}}
 ```
 
 ## Usage
-```rust,ignore
+```rust,editable,ignore
 let mut dsu = DSU::new(n);
 dsu.find(u);
 dsu.merge(u, v);

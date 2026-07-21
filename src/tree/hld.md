@@ -7,25 +7,25 @@
 
 ## Usage
 ### Init
-```rust,ignore
+```rust,editable,ignore
 let mut hld: HLD<dyn Node> = HLD::new(&tree, &weight);
 hld.set_weight_on_nodes(true); // weight on node OR weight on edge?
 ```
 
 ### Set
-```rust,ignore
+```rust,editable,ignore
 hld.set_node(u: usize, node: Node);
 hld.set_edge((u, v): (usize, usize), node: Node);
 ```
 
 ### Query
-```rust,ignore
+```rust,editable,ignore
 hld.query_subtree(root: usize);
 hld.query_path(u: usize, v: usize);
 ```
 
 ### Distance
-```rust,ignore
+```rust,editable,ignore
 hld.distance(u: usize, v: usize);
 ```
 

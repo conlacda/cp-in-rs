@@ -92,7 +92,10 @@ dependencies = [
 name = "rs_space"
 version = "0.1.0"
 dependencies = [
+ "proc-macro2",
+ "quote",
  "rand",
+ "syn",
 ]
 
 [[package]]

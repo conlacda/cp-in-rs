@@ -20,23 +20,23 @@ assert!(m * m.inv() == 1);
 ```
 
 ### factor
-```rust,ignore
+```rust,editable,ignore
 m.factor(); // m! = 1*2*3*...*m
 ```
 
 ### ncr, npr
-```rust,ignore
+```rust,editable,ignore
 n.ncr(r);
 n.npr(r);
 ```
 
 ### pow
-```rust,ignore
+```rust,editable,ignore
 m.pow(x); // m^x
 ```
 
 ### basic operations
-```rust,ignore
+```rust,editable,ignore
 let mut m: Mint<MOD> = 3.into();
 m += 3.into();
 m -= 2.into();

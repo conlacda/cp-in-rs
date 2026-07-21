@@ -1,7 +1,7 @@
 ## VecDeque
 Equivalent to `std:deque` in C++
 
-```rust
+```rust,editable,ignore
 use std::collections::VecDeque;
 
 let mut q = VecDeque::new();

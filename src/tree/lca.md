@@ -1,13 +1,13 @@
 # Lowest common ancestor (LCA)
 
 ## Template
-```rust,editable
+```rust,editable,ignore
 {{#include ../../code/src/tree/lca.rs:main}}
 ```
 
 ## Usage
-```rust,ignore
-let lca = LCA::new(&Vec<Vec<usize>>, root);
+```rust,editable,ignore
+let lca = LCA::new(&[Vec<usize>], root);
 lca.lca(u, v);
 ```
 

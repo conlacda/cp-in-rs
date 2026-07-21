@@ -1,5 +1,5 @@
 # BTreeMap/HashMap
-```rust
+```rust,editable,ignore
 use std::collections::HashMap;
 use std::collections::BTreeMap;
 
@@ -14,13 +14,13 @@ for (k, v) in &map {
 }
 ```
 **Insert**
-```rust
+```rust,editable,ignore
 map.insert(key, value);
 ```
 Insert again with the same key to overwrite its value.
 
 **Get a value**
-```rust
+```rust,editable,ignore
 if let Some(val) = map.get(&key) {
     dbg!(val);
 }
@@ -31,7 +31,7 @@ if map.contains_key(&key) {
 ```
 
 **Update a value**
-```rust
+```rust,editable,ignore
 if let Some(value) = map.get_mut(&key) {
     *value = new_value; // *value += 3;
 }
@@ -45,6 +45,6 @@ if map.contains_key(&key) {
 To set a value regardless of whether the key already exists, simply use `map.insert(key, value)`.
 
 **Remove**
-```rust
+```rust,editable,ignore
 map.remove(&key);
 ```

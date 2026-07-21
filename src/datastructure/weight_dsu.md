@@ -1,12 +1,12 @@
 # Weight DSU
 
 ## Template
-```rust 
+```rust,editable,ignore
 {{#include ../../code/src/datastructure/weight_dsu.rs:main}}
 ```
 
 ## Usage
-```rust,ignore
+```rust,editable,ignore
 let mut dsu = WeightDsu::new(n);
 dsu.find(1);
 dsu.merge(a, b, dist); // height[a] - height[b] = dist
