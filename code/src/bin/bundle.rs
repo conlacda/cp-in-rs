@@ -1,4 +1,4 @@
-use quote::{quote, ToTokens};
+use quote::{ToTokens, quote};
 use std::collections::{BTreeMap, BTreeSet, VecDeque};
 use std::env;
 use std::fs;
@@ -9,8 +9,8 @@ use syn::parse::Parser;
 use syn::visit::{self, Visit};
 use syn::visit_mut::{self, VisitMut};
 use syn::{
-    punctuated::Punctuated, Attribute, Expr, File, Item, ItemMacro, ItemMod, ItemUse,
-    Path as SynPath, Stmt, Token, UseTree,
+    Attribute, Expr, File, Item, ItemMacro, ItemMod, ItemUse, Path as SynPath, Stmt, Token,
+    UseTree, punctuated::Punctuated,
 };
 
 type ModulePath = Vec<String>;
@@ -26,7 +26,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         [flag] if flag == "--clipboard" || flag == "-c" => {
             (PathBuf::from("src/main.rs"), None, true)
         }
-        [input] => (PathBuf::from(input), Some(PathBuf::from("submission.rs")), false),
+        [input] => (
+            PathBuf::from(input),
+            Some(PathBuf::from("submission.rs")),
+            false,
+        ),
         [input, output] => (PathBuf::from(input), Some(PathBuf::from(output)), false),
         _ => return Err("usage: cargo bundle [INPUT [OUTPUT]] | cargo bundle --clipboard".into()),
     };
@@ -69,7 +73,11 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     if let Some(output) = &output {
         fs::write(&output, &bundled)?;
-        eprintln!("bundled {} module(s) into {}", selected.len(), output.display());
+        eprintln!(
+            "bundled {} module(s) into {}",
+            selected.len(),
+            output.display()
+        );
     }
     if copy {
         if copy_to_clipboard(&bundled) {
@@ -134,7 +142,10 @@ fn discover_modules(src_dir: &Path) -> io::Result<BTreeMap<ModulePath, PathBuf>>
                 }
                 walk(&path, src_dir, result)?;
             } else if path.extension().is_some_and(|ext| ext == "rs")
-                && !matches!(path.file_name().and_then(|x| x.to_str()), Some("main.rs" | "lib.rs" | "mod.rs"))
+                && !matches!(
+                    path.file_name().and_then(|x| x.to_str()),
+                    Some("main.rs" | "lib.rs" | "mod.rs")
+                )
             {
                 let relative = path.strip_prefix(src_dir).expect("module is below src");
                 let mut module: ModulePath = relative
@@ -194,9 +205,10 @@ fn remove_test_items(items: &mut Vec<Item>) {
     });
     for item in items {
         if let Item::Mod(module) = item
-            && let Some((_, nested)) = &mut module.content {
-                remove_test_items(nested);
-            }
+            && let Some((_, nested)) = &mut module.content
+        {
+            remove_test_items(nested);
+        }
     }
 }
 
@@ -290,10 +302,17 @@ fn discover_exported_macros(
             continue;
         };
         for item in file.items {
-            if let Item::Macro(ItemMacro { attrs, ident: Some(ident), .. }) = item
-                && attrs.iter().any(|attr| attr.path().is_ident("macro_export")) {
-                    result.insert(ident.to_string(), module.clone());
-                }
+            if let Item::Macro(ItemMacro {
+                attrs,
+                ident: Some(ident),
+                ..
+            }) = item
+                && attrs
+                    .iter()
+                    .any(|attr| attr.path().is_ident("macro_export"))
+            {
+                result.insert(ident.to_string(), module.clone());
+            }
         }
     }
     Ok(result)
@@ -318,7 +337,10 @@ struct References<'a> {
 
 impl<'a> References<'a> {
     fn new(root: &'a str) -> Self {
-        Self { root, paths: Vec::new() }
+        Self {
+            root,
+            paths: Vec::new(),
+        }
     }
 
     fn record_path(&mut self, path: &SynPath) {
@@ -381,9 +403,10 @@ impl<'ast> Visit<'ast> for References<'_> {
 fn rewrite_crate_name(items: &mut [Item], crate_name: &str) {
     fn rewrite_use(tree: &mut UseTree, crate_name: &str) {
         if let UseTree::Path(path) = tree
-            && path.ident == crate_name {
-                path.ident = syn::Ident::new("crate", path.ident.span());
-            }
+            && path.ident == crate_name
+        {
+            path.ident = syn::Ident::new("crate", path.ident.span());
+        }
     }
 
     for item in items {
@@ -410,7 +433,8 @@ fn render_modules(
         let own_items = if let Some(module) = &node.source {
             let mut file = parse_file(&modules[module])?;
             remove_test_items(&mut file.items);
-            file.items.retain(|item| !matches!(item, Item::Mod(ItemMod { content: None, .. })));
+            file.items
+                .retain(|item| !matches!(item, Item::Mod(ItemMod { content: None, .. })));
             let items = file.items;
             quote!(#(#items)*)
         } else {
@@ -449,5 +473,9 @@ fn rustfmt(source: &str) -> Option<String> {
     stdin.write_all(source.as_bytes()).ok()?;
     drop(stdin);
     let output = child.wait_with_output().ok()?;
-    output.status.success().then(|| String::from_utf8(output.stdout).ok()).flatten()
+    output
+        .status
+        .success()
+        .then(|| String::from_utf8(output.stdout).ok())
+        .flatten()
 }
