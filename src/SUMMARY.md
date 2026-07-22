@@ -30,6 +30,7 @@
 # Graph
 - [Toposort](./graph/toposort.md)
 - [SCC](./graph/scc.md)
+- [MST](./graph/mst.md)
 
 # Tree
 - [Tree](./tree/mix.md)

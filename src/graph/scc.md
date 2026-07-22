@@ -1,7 +1,7 @@
 # SCC
 ## Template
 ```rust,editable,ignore
-{{#include ../../code/src/graph.rs:find_scc}}
+{{#include ../../code/src/graph/find_scc.rs:main}}
 ```
 
 ## Usage

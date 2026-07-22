@@ -2,7 +2,7 @@
 
 ## Template
 ```rust,editable,ignore
-{{#include ../../code/src/graph.rs:toposort}}
+{{#include ../../code/src/graph/toposort.rs:main}}
 ```
 
 ## Usage
