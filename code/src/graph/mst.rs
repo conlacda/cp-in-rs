@@ -12,9 +12,9 @@ pub struct Edge {
 pub fn kruskal(graph: &[Vec<(usize, i64)>]) -> Vec<Edge> {
     let n = graph.len();
     let mut edges: Vec<Edge> = Vec::new();
-    for u in 0..n {
-        for (v, w) in &graph[u] {
-            edges.push(Edge { u, v: *v, w: *w });
+    for (u, neighbors) in graph.iter().enumerate() {
+        for &(v, w) in neighbors {
+            edges.push(Edge { u, v, w });
         }
     }
     edges.sort_by_key(|edge| edge.w);
