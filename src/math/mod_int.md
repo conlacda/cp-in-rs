@@ -1,13 +1,13 @@
 # Mod int
 
 ## Template
-```rust 
+```rust,editable,ignore
 {{#include ../../code/src/math/mint.rs:main}}
 ```
 
 ## Usage
 ### Init
-```rust,ignore
+```rust,editable,ignore
 const MOD: u32 = 1000000007;
 let m: Mint<MOD> = 1000000008.into();
 let m = Mint::<MOD>::from(1000000008);
@@ -15,7 +15,7 @@ assert!(m.val == 1);
 ```
 
 ### inv
-```rust,ignore
+```rust,editable,ignore
 assert!(m * m.inv() == 1);
 ```
 

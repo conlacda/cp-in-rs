@@ -72,7 +72,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let bundled = remove_doc_attributes(&formatted);
 
     if let Some(output) = &output {
-        fs::write(&output, &bundled)?;
+        fs::write(output, &bundled)?;
         eprintln!(
             "bundled {} module(s) into {}",
             selected.len(),
