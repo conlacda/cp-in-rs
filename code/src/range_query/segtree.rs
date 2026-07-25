@@ -253,6 +253,18 @@ impl Node for Subrange {
             has_value: true,
         }
     }
+    fn right_to_left(&self) -> Self {
+        Self {
+            max_mid: self.max_mid,
+            min_mid: self.min_mid,
+            max_pref: self.max_suf,
+            min_pref: self.min_suf,
+            max_suf: self.max_pref,
+            min_suf: self.min_pref,
+            whole: self.whole,
+            has_value: self.has_value,
+        }
+    }
 }
 // ANCHOR_END: Subrange
 

@@ -16,23 +16,26 @@ pub struct Mint<const MOD: u32 = 1000000007> {
 }
 
 impl<const MOD: u32> Mint<MOD> {
+    #[inline]
+    fn mul_mod(a: u32, b: u32) -> u32 {
+        (u64::from(a) * u64::from(b) % u64::from(MOD)) as u32
+    }
+
     fn build_precalc() -> Precalc {
         let mut inv_range = vec![1u32; PRECALCULATE_LEN];
         for i in 2..PRECALCULATE_LEN {
-            inv_range[i] = (MOD
-                - (((MOD / i as u32) as u64) * (inv_range[(MOD % i as u32) as usize] as u64)
-                    % MOD as u64) as u32)
-                % MOD;
+            inv_range[i] =
+                (MOD - Self::mul_mod(MOD / i as u32, inv_range[(MOD % i as u32) as usize])) % MOD;
         }
 
         let mut fact = vec![1u32; PRECALCULATE_LEN];
         for i in 1..PRECALCULATE_LEN {
-            fact[i] = ((fact[i - 1] as u64 * i as u64) % MOD as u64) as u32;
+            fact[i] = Self::mul_mod(fact[i - 1], i as u32);
         }
 
         let mut finv = vec![1u32; PRECALCULATE_LEN];
         for i in 1..PRECALCULATE_LEN {
-            finv[i] = ((finv[i - 1] as u64 * inv_range[i] as u64) % MOD as u64) as u32;
+            finv[i] = Self::mul_mod(finv[i - 1], inv_range[i]);
         }
 
         Precalc {
@@ -49,11 +52,7 @@ impl<const MOD: u32> Mint<MOD> {
 
     #[inline]
     fn normalize(v: i64) -> u32 {
-        let mut val = v % MOD as i64;
-        if val < 0 {
-            val += MOD as i64;
-        }
-        val.try_into().unwrap()
+        v.rem_euclid(MOD as i64) as u32
     }
 
     pub fn inv(&self) -> Self {
@@ -69,7 +68,7 @@ impl<const MOD: u32> Mint<MOD> {
         let mut val = 1u32;
         while t != 1 {
             let z = MOD / t;
-            val = (val as u64 * (MOD - z) as u64 % MOD as u64) as u32;
+            val = Self::mul_mod(val, MOD - z);
             t = MOD - t * z;
         }
         Self { val }
@@ -161,7 +160,9 @@ impl<const MOD: u32> SubAssign for Mint<MOD> {
 impl<const MOD: u32> Mul for Mint<MOD> {
     type Output = Self;
     fn mul(self, rhs: Self) -> Self::Output {
-        Self::from(self.val as i64 * rhs.val as i64)
+        Self {
+            val: Self::mul_mod(self.val, rhs.val),
+        }
     }
 }
 
@@ -213,8 +214,7 @@ mod tests {
             let a: Mint<MOD> = r.num(1..MOD as i64).into();
             let b: Mint<MOD> = r.num(1..MOD as i64).into();
             assert!((a + b).val == (a.val + b.val) % MOD);
-            let expected =
-                ((((a.val as i64 - b.val as i64) % MOD as i64) + MOD as i64) % MOD as i64) as u32;
+            let expected = (a.val as i64 - b.val as i64).rem_euclid(MOD as i64) as u32;
             assert!((a - b).val == expected);
             let mut x = a;
             x += b;

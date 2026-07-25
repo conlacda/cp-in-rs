@@ -1,4 +1,3 @@
-#![allow(dead_code)]
 // ANCHOR: main
 use crate::datastructure::dsu::DSU;
 
@@ -20,9 +19,9 @@ pub fn kruskal(graph: &[Vec<(usize, i64)>]) -> Vec<Edge> {
     edges.sort_by_key(|edge| edge.w);
     let mut dsu = DSU::new(n);
     let mut mst: Vec<Edge> = Vec::new();
-    for edge in &edges {
+    for &edge in &edges {
         if !dsu.is_same(edge.u, edge.v) {
-            mst.push(*edge);
+            mst.push(edge);
             dsu.merge(edge.u, edge.v);
         }
     }

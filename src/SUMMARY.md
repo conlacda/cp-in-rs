@@ -26,6 +26,7 @@
   - [Range update point query](./range-query/fw-range-update-point-query.md)
 - [RMQ](./range-query/rmq.md)
 - [Segment tree](./range-query/segtree.md)
+- [Lazy segment tree](./range-query/lazy-segtree.md)
 
 # Graph
 - [Toposort](./graph/toposort.md)
