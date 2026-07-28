@@ -14,7 +14,9 @@
 ## Usage
 ### Init
 ```rust,editable,ignore
-let nodes: Vec<RangeAffineSumNode> = (0..n).map(|_| RangeAffineSumNode::new(scan.token())).collect();
+let nodes: Vec<RangeAffineSumNode> = (0..n)
+    .map(|_| RangeAffineSumNode::new(scan.token()))
+    .collect();
 let mut seg = LazySegTree::from(&nodes);
 ```
 
@@ -26,8 +28,8 @@ seg.set(index, RangeAffineSumNode::new(value));
 ### Query
 ```rust,editable,ignore
 // Both endpoints are inclusive.
-let range_sum = seg.query(left, right).val;
-let whole_sum = seg.query_all().val;
+let range = seg.query(left, right).val;
+let whole = seg.query_all().val;
 ```
 
 ### Range affine update
@@ -35,3 +37,9 @@ let whole_sum = seg.query_all().val;
 // array[l..=r] = a * array[l..=r] + b
 seg.update(left, right, RangeAffineLazyNode { a, b });
 ```
+
+### Practice problems
+- [K - Range Affine Range Sum](https://atcoder.jp/contests/practice2/tasks/practice2_k)
+  - [Solution](../verify/range-query/Range_Affine_Range_Sum.rs)
+- [Cses - Range Updates and Sums](https://cses.fi/problemset/task/1735/)
+  - [Solution](../verify/range-query/Range_Updates_and_Sums.rs)

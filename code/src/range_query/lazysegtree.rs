@@ -1,4 +1,5 @@
 // ANCHOR: lazysegtree
+use crate::math::mint::Mint;
 use crate::range_query::segtree::Node;
 
 pub trait LazyNode<N: Node>: Default + Copy {
@@ -147,24 +148,24 @@ where
 
 // ANCHOR: range_affine
 // Query sum
-// Update node = a * node + b;
-const MOD: i64 = 998244353;
+// Update val = a * val + b;
+const MOD: u32 = 998244353;
 #[derive(Default, Clone, Copy)]
 pub struct RangeAffineSumNode {
-    pub val: i64,
+    pub val: Mint<MOD>,
     pub size: usize,
 }
 
 impl Node for RangeAffineSumNode {
     fn new(val: i64) -> Self {
         Self {
-            val: val.rem_euclid(MOD),
+            val: val.into(),
             size: 1,
         }
     }
     fn combine(&self, other: &Self) -> Self {
         Self {
-            val: (self.val + other.val) % MOD,
+            val: self.val + other.val,
             size: self.size + other.size,
         }
     }
@@ -172,24 +173,60 @@ impl Node for RangeAffineSumNode {
 
 #[derive(Copy, Clone)]
 pub struct RangeAffineLazyNode {
-    pub a: i64,
-    pub b: i64,
+    pub a: Mint<MOD>,
+    pub b: Mint<MOD>,
 }
 
 impl Default for RangeAffineLazyNode {
     fn default() -> Self {
-        Self { a: 1, b: 0 }
+        Self {
+            a: 1.into(),
+            b: 0.into(),
+        }
     }
 }
 
 impl LazyNode<RangeAffineSumNode> for RangeAffineLazyNode {
     fn compose(&mut self, other: &Self) {
-        self.b = (other.a * self.b + other.b) % MOD;
-        self.a = (other.a * self.a) % MOD;
+        self.b = other.a * self.b + other.b;
+        self.a *= other.a;
     }
 
     fn apply_to(&self, node: &mut RangeAffineSumNode) {
-        node.val = (self.a * node.val + self.b * node.size as i64) % MOD;
+        node.val = node.val * self.a + self.b * node.size as i64;
+    }
+}
+
+// Query min
+// Update val = a * val + b;
+#[derive(Copy, Default, Clone)]
+pub struct RangeAffineMinNode {
+    pub val: Mint<MOD>,
+    pub size: usize,
+}
+impl Node for RangeAffineMinNode {
+    fn new(val: i64) -> Self {
+        Self {
+            val: val.into(),
+            size: 1,
+        }
+    }
+    fn combine(&self, other: &Self) -> Self {
+        Self {
+            val: self.val.min(other.val),
+            size: self.size + other.size,
+        }
+    }
+}
+
+impl LazyNode<RangeAffineMinNode> for RangeAffineLazyNode {
+    fn compose(&mut self, other: &Self) {
+        self.b = other.a * self.b + other.b;
+        self.a *= other.a;
+    }
+
+    fn apply_to(&self, node: &mut RangeAffineMinNode) {
+        node.val = node.val * self.a + self.b;
     }
 }
 // ANCHOR_END: range_affine
@@ -200,12 +237,13 @@ mod tests {
     use crate::random::Random;
 
     #[test]
-    fn test_range_affine() {
+    fn test_range_affine_sum() {
         let mut r = Random::new();
         let n = r.num(1000..10000);
-        let mut array = r.vector(n, -5_000_000..5_000_000);
+        let v = r.vector(n, -5_000_000..5_000_000);
+        let mut array: Vec<Mint<MOD>> = v.iter().map(|&val| val.into()).collect();
         let nodes: Vec<RangeAffineSumNode> =
-            array.iter().copied().map(RangeAffineSumNode::new).collect();
+            v.iter().copied().map(RangeAffineSumNode::new).collect();
         let mut seg: LazySegTree<RangeAffineSumNode, RangeAffineLazyNode> =
             LazySegTree::from(&nodes);
         let q = 1000;
@@ -215,24 +253,37 @@ mod tests {
             let query_type = r.num(0..3);
             if query_type == 0 {
                 // query
-                let correct = array[left..=right].iter().sum::<i64>().rem_euclid(MOD);
+                let correct: Mint<MOD> = array[left..=right]
+                    .iter()
+                    .copied()
+                    .fold(0.into(), |sum, value| sum + value);
                 assert_eq!(correct, seg.query(left, right).val);
             } else if query_type == 1 {
                 // update
                 let a = r.num(0..100);
                 let b = r.num(0..1000);
                 for i in left..=right {
-                    array[i] = (a * array[i] + b) % MOD;
+                    array[i] = array[i] * a + b;
                 }
-                seg.update(left, right, RangeAffineLazyNode { a, b });
+                seg.update(
+                    left,
+                    right,
+                    RangeAffineLazyNode {
+                        a: a.into(),
+                        b: b.into(),
+                    },
+                );
             } else if query_type == 2 {
                 // set
                 let index = r.num(0..n);
                 let value: i64 = r.num(-5_000_000..5_000_000);
-                array[index] = value.rem_euclid(MOD);
+                array[index] = value.into();
                 seg.set(index, RangeAffineSumNode::new(value));
             }
-            let array_sum = array.iter().sum::<i64>().rem_euclid(MOD);
+            let array_sum: Mint<MOD> = array
+                .iter()
+                .copied()
+                .fold(0.into(), |sum, value| sum + value);
             assert_eq!(array_sum, seg.query(0, seg.len - 1).val);
             assert_eq!(array_sum, seg.query_all().val);
         }

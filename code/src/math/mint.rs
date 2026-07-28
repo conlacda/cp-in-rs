@@ -1,4 +1,5 @@
 // ANCHOR: main
+use std::fmt::{Display, Formatter, Result};
 use std::ops::{Add, AddAssign, Div, DivAssign, Mul, MulAssign, Sub, SubAssign};
 use std::sync::OnceLock;
 
@@ -10,7 +11,7 @@ struct Precalc {
 }
 static PRECALC: OnceLock<Precalc> = OnceLock::new();
 
-#[derive(Debug, Clone, Copy, PartialEq, PartialOrd)]
+#[derive(Default, Debug, Clone, Copy, PartialEq, PartialOrd, Eq, Ord)]
 pub struct Mint<const MOD: u32 = 1000000007> {
     pub val: u32,
 }
@@ -48,11 +49,6 @@ impl<const MOD: u32> Mint<MOD> {
     #[inline]
     fn precalc() -> &'static Precalc {
         PRECALC.get_or_init(Self::build_precalc)
-    }
-
-    #[inline]
-    fn normalize(v: i64) -> u32 {
-        v.rem_euclid(MOD as i64) as u32
     }
 
     pub fn inv(&self) -> Self {
@@ -127,12 +123,23 @@ impl<const MOD: u32> Mint<MOD> {
         res
     }
 }
-impl<const MOD: u32> From<i64> for Mint<MOD> {
-    fn from(v: i64) -> Self {
-        let val = Mint::<MOD>::normalize(v);
-        Self { val }
-    }
+
+macro_rules! impl_from_integer {
+    ($($type:ty),* $(,)?) => {
+        $(
+            impl<const MOD: u32> From<$type> for Mint<MOD> {
+                fn from(v: $type) -> Self {
+                    Self {
+                        val: (v as i128).rem_euclid(MOD as i128) as u32,
+                    }
+                }
+            }
+        )*
+    };
 }
+
+impl_from_integer!(i32, u32, i64, u64);
+
 impl<const MOD: u32> Add for Mint<MOD> {
     type Output = Self;
     fn add(self, rhs: Self) -> Self {
@@ -184,6 +191,72 @@ impl<const MOD: u32> DivAssign for Mint<MOD> {
         *self = self.div(rhs);
     }
 }
+
+macro_rules! impl_ops_with_integer {
+    ($($type:ty),* $(,)?) => {
+        $(
+            impl<const MOD: u32> Add<$type> for Mint<MOD> {
+                type Output = Self;
+                fn add(self, rhs: $type) -> Self::Output {
+                    self + Self::from(rhs)
+                }
+            }
+
+            impl<const MOD: u32> AddAssign<$type> for Mint<MOD> {
+                fn add_assign(&mut self, rhs: $type) {
+                    *self += Self::from(rhs);
+                }
+            }
+
+            impl<const MOD: u32> Sub<$type> for Mint<MOD> {
+                type Output = Self;
+                fn sub(self, rhs: $type) -> Self::Output {
+                    self - Self::from(rhs)
+                }
+            }
+
+            impl<const MOD: u32> SubAssign<$type> for Mint<MOD> {
+                fn sub_assign(&mut self, rhs: $type) {
+                    *self -= Self::from(rhs);
+                }
+            }
+
+            impl<const MOD: u32> Mul<$type> for Mint<MOD> {
+                type Output = Self;
+                fn mul(self, rhs: $type) -> Self::Output {
+                    self * Self::from(rhs)
+                }
+            }
+
+            impl<const MOD: u32> MulAssign<$type> for Mint<MOD> {
+                fn mul_assign(&mut self, rhs: $type) {
+                    *self *= Self::from(rhs);
+                }
+            }
+
+            impl<const MOD: u32> Div<$type> for Mint<MOD> {
+                type Output = Self;
+                fn div(self, rhs: $type) -> Self::Output {
+                    self / Self::from(rhs)
+                }
+            }
+
+            impl<const MOD: u32> DivAssign<$type> for Mint<MOD> {
+                fn div_assign(&mut self, rhs: $type) {
+                    *self /= Self::from(rhs);
+                }
+            }
+        )*
+    };
+}
+
+impl_ops_with_integer!(i32, i64, u32, u64);
+
+impl<const MOD: u32> Display for Mint<MOD> {
+    fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+        write!(f, "{}", self.val)
+    }
+}
 // ANCHOR_END: main
 
 #[cfg(test)]
@@ -231,6 +304,27 @@ mod tests {
             assert!(x == a);
         }
         assert!(Mint::<MOD>::from(MOD as i64) == Mint::<MOD>::from(0));
+    }
+
+    #[test]
+    fn test_ops_with_integers() {
+        let mut m: Mint<MOD> = 3.into();
+        m += 3;
+        m -= 2_i64;
+        m *= 3_u32;
+        m /= 3_u64;
+        assert_eq!(m, 4.into());
+
+        assert_eq!(m + 2_i32, 6.into());
+        assert_eq!(m - 5_i64, (-1).into());
+        assert_eq!(m * 3_u32, 12.into());
+        assert_eq!(m / 2_u64, 2.into());
+
+        assert_eq!(Mint::<MOD>::from(-1_i32), (MOD as i64 - 1).into());
+        assert_eq!(
+            Mint::<MOD>::from(u64::MAX).val,
+            (u64::MAX % u64::from(MOD)) as u32
+        );
     }
 
     fn max_power(x: i64) -> u32 {
