@@ -8,6 +8,7 @@
 - [BtreeSet](./fundamental_datastructure/BTreeSet-HashSet.md)
 - [VecDeque-Queue](./fundamental_datastructure/VecDeque-Queue.md)
 - [BinaryHeap](./fundamental_datastructure/BinaryHeap.md)
+- [Multiset](./fundamental_datastructure/Multiset.md)
 
 # Data structure
 - [DSU](./datastructure/dsu.md)
