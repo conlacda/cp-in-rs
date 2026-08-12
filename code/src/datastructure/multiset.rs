@@ -225,15 +225,6 @@ impl Treap {
         }
         self.at(self.nodes[root].right_child_id, index - 1)
     }
-
-    // pub remove_index
-    // count (equal)
-    // nearest_down
-    // nearest_up
-    // count between
-    // get_range
-    // split3PartsBySize
-    // remove_range
 }
 
 pub struct Multiset {
